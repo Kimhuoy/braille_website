@@ -1,0 +1,76 @@
+.nav-link {
+  text-decoration: none;
+  position: relative;
+}
+
+.nav-link:hover {
+  text-decoration: none;
+}
+
+.nav-link::after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 0;
+  background-color: rgb(96 165 250); /* Adjust the color of the underline */
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+
+  transition: width 0.2s; /* Add a transition for a smooth effect */
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.feature {
+  text-decoration: none;
+  position: relative;
+}
+
+.feature:hover {
+  text-decoration: none;
+}
+
+.feature::after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 0;
+  background-color: rgb(96 165 250); /* Adjust the color of the underline */
+  position: absolute;
+  left: 52%;
+  bottom: px;
+  transform: translateX(-50%);
+  transition: width 0.2s; /* Add a transition for a smooth effect */
+}
+
+.feature:hover::after {
+  width: 92%;
+}
+
+.button-beat:hover {
+  transform: scale(1.1);
+}
+
+.button-beat:active {
+  transform: scale(0.9);
+  transition: transform 0.15s ease-in-out;
+}
+
+.custom-numbered-list {
+  list-style-type: none; /* Remove default numbering */
+}
+
+.custom-numbered-list li {
+  counter-increment: list-item-counter; /* Increment the counter */
+  
+}
+
+.custom-numbered-list li:before {
+  content: counter(list-item-counter); /* Use the counter for numbering */
+  margin-right: 0.5em; /* Adjust spacing between number and text */
+  color: #8a0d0d;
+  
+}

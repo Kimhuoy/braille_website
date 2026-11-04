@@ -1,0 +1,92 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@300;400&display=swap');
+    
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input[type="text"]:focus ~ .input-text{ 
+    @apply text-blue-500 transform bg-white -translate-y-4 -translate-x-4 scale-75;
+}
+body {
+    font-family: 'Koh Santepheap','Noto Sans', sans-serif;
+    background-color: rgba(245,247,248,255);
+    color: #15274b; 
+  }
+
+/* Accessibility: strong, visible focus ring for keyboard users on every
+   interactive element (buttons, links, inputs, textareas). */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Visually-hidden but screen-reader-accessible text */
+.sr-only-visible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip-to-content link: hidden until focused via keyboard */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  z-index: 100;
+  background: #15274b;
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 8px 0;
+  font-weight: bold;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+
+/* ---- Equation ribbon previews (Word-style gallery tiles) ---- */
+/* The hint text in a Braille box uses the page's normal font and size (text-base md:text-lg),
+   like the hint in the other box; the Braille font is only for the dots. */
+.font-braille::placeholder { font-family: 'Koh Santepheap', 'Noto Sans', sans-serif; font-size: 1rem; letter-spacing: normal; }
+@media (min-width: 768px) { .font-braille::placeholder { font-size: 1.125rem; } }
+.eq-preview { font-family: "Cambria Math", "STIX Two Math", "Times New Roman", serif; line-height: 1; }
+.eq-ph { display: inline-block; width: 0.7em; height: 0.85em; border: 1px dashed #6b7280; vertical-align: middle; margin: 0 1px; }
+.eq-frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; font-size: 0.85em; }
+.eq-frac > span:first-child { border-bottom: 1px solid currentColor; padding: 0 2px 1px; }
+.eq-frac > span:last-child { padding: 1px 2px 0; }
+.eq-sup, .eq-sub, .eq-idx { font-size: 0.6em; }
+.eq-subsup { display: inline-flex; flex-direction: column; font-size: 0.6em; vertical-align: middle; line-height: 1.1; }
+.eq-subsup sup, .eq-subsup sub { font-size: 1em; vertical-align: baseline; }
+.eq-idx { vertical-align: 0.9em; margin-right: -0.35em; }
+.eq-rad { font-size: 1.1em; }
+.eq-radbody { border-top: 1px solid currentColor; padding: 1px 2px 0; }
+.eq-bar, .eq-vec, .eq-hat { position: relative; display: inline-block; padding-top: 0.35em; }
+.eq-bar { border-top: 1px solid currentColor; }
+.eq-vec::before, .eq-hat::before { position: absolute; top: -0.45em; left: 0; right: 0; text-align: center; font-size: 0.8em; }
+.eq-vec::before { content: "→"; }
+.eq-hat::before { content: "^"; }
+.eq-uo { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; line-height: 1; }
+.eq-uo small { font-size: 0.5em; }
+.eq-draw { display: inline-block; white-space: pre; text-align: left; font-family: Consolas, "Courier New", monospace; font-size: 0.6em; line-height: 1.1; }
+.eq-mat { display: inline-flex; flex-direction: column; font-size: 0.7em; vertical-align: middle; line-height: 1.2; }

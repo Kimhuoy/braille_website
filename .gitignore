@@ -1,0 +1,42 @@
+venv/
+.venv/
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+__pycache__
+old_venv
+# Secrets and generated machine files
+.env
+.env.*
+*.pem
+*.key
+*.gcode
+# Contributions and feedback sent through the website (personal data + uploaded files)
+Backend/contributions/
+Backend/feedback/
+# file-to-gcode is one script and a README; documents and G-code put there stay on this computer
+file-to-gcode/*
+!file-to-gcode/file_to_gcode.py
+!file-to-gcode/README.md

@@ -1,0 +1,14 @@
+node_modules
+dist
+venv
+.venv
+__pycache__
+Backend/contributions
+Backend/feedback
+Backend/uploads
+Backend/tests
+Backend/*.gcode
+.env
+.env.*
+*.pem
+*.key

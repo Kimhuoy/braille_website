@@ -1,0 +1,20 @@
+/* src/styles/tailwind.css */
+
+/* @font-face {
+    font-family: 'KohSante';
+    src: url('Frontend/src/fonts/KOHSANTEPHEAP-REGULAR.TTF') format('truetype');
+    /* Add more src lines if you have multiple font formats (e.g., woff, woff2) */
+   */
+  
+  /* Apply the custom font to elements */
+  body {
+     font-family: 'Koh Santepheap', serif;
+  } 
+
+  
+ 
+  /* Include Tailwind CSS styles */
+  @import 'tailwindcss/base';
+  @import 'tailwindcss/components';
+  @import 'tailwindcss/utilities';
+  

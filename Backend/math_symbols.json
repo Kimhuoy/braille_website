@@ -1,0 +1,460 @@
+{
+  "_about": "Math symbol -> Braille ASCII (SimBraille / North-American Braille ASCII, 6-dot) codes. Second-stage conversion to 6-dot Unicode cells uses english_to_braille_dictionary.json, exactly like Khmer text. Every code below is taken from the Krousar Thmey math PDFs (page number in 'source'); 'rule' entries apply the PDF's own negation rule (p.72: a leading / reverses a symbol). kind: op = plain operator; rel = relation, written with a space on each side and followed by the numeric indicator; reset = no spaces but numeric indicator follows; shape = followed by a space; sup = written at superscript level (degree).",
+  "symbols": {
+    "=": {
+      "code": ".k",
+      "kind": "rel",
+      "source": "all PDFs, e.g. General p.24"
+    },
+    "≠": {
+      "code": "/.k",
+      "kind": "rel",
+      "source": "rule: negation (Geometric p.72) applied to ="
+    },
+    "+": {
+      "code": "+",
+      "kind": "op",
+      "source": "Exponent p.19, General p.24"
+    },
+    "-": {
+      "code": "-",
+      "kind": "op",
+      "source": "General p.24 (2x-y)"
+    },
+    "−": {
+      "code": "-",
+      "kind": "op",
+      "source": "General p.24 (minus sign)"
+    },
+    "×": {
+      "code": "@*",
+      "kind": "op",
+      "source": "Fraction p.21 (2×2=4 -> #2@*2.k#4)"
+    },
+    "⋅": {
+      "code": "*",
+      "kind": "op",
+      "source": "Fraction p.21 (x.x = x*x)"
+    },
+    "·": {
+      "code": "*",
+      "kind": "op",
+      "source": "Fraction p.21 (multiplication dot)"
+    },
+    "∗": {
+      "code": "*",
+      "kind": "op",
+      "source": "Fraction p.21 (star multiplication)"
+    },
+    "÷": {
+      "code": "./",
+      "kind": "op",
+      "source": "Fraction p.22 (19÷3 -> #19./3)"
+    },
+    ":": {
+      "code": "\"1",
+      "kind": "reset",
+      "source": "Fraction p.20 (ratio 2:4 -> #2\"1#4)"
+    },
+    "∶": {
+      "code": "\"1",
+      "kind": "reset",
+      "source": "Fraction p.20 (ratio)"
+    },
+    "∷": {
+      "code": ";2",
+      "kind": "reset",
+      "source": "Fraction p.20 (proportion)"
+    },
+    "⇒": {
+      "code": "$77o",
+      "kind": "rel",
+      "source": "Fraction p.20 (implies)"
+    },
+    "→": {
+      "code": "$33o",
+      "kind": "rel",
+      "source": "General p.36 (arrow); inside lim it is written $o, General p.31"
+    },
+    "↦": {
+      "code": "$|33o",
+      "kind": "rel",
+      "source": "General p.32 (t ↦ 5t³)"
+    },
+    "√": {
+      "code": ">",
+      "kind": "op",
+      "source": "General p.24 (radical; inside ⟦ ⟧ it is closed with ])"
+    },
+    "∛": {
+      "code": "<3>",
+      "kind": "op",
+      "source": "General p.25 (cube root)"
+    },
+    "∜": {
+      "code": "<4>",
+      "kind": "op",
+      "source": "General p.25 (fourth root)"
+    },
+    "℃": {
+      "code": ".*;,c",
+      "kind": "op",
+      "source": "Exponent p.19 (°C)"
+    },
+    "°": {
+      "code": ".*",
+      "kind": "sup",
+      "source": "Exponent p.19 (40°+50°=90° -> #40^.*\"+50^.*)"
+    },
+    "∘": {
+      "code": ".*",
+      "kind": "op",
+      "source": "Exponent p.19 (f∘g -> f.*g)"
+    },
+    "∫": {
+      "code": "!",
+      "kind": "op",
+      "source": "General p.36"
+    },
+    "∬": {
+      "code": "!!",
+      "kind": "op",
+      "source": "General p.36"
+    },
+    "∭": {
+      "code": "!!!",
+      "kind": "op",
+      "source": "General p.36"
+    },
+    "∑": {
+      "code": ".,s",
+      "kind": "op",
+      "source": "General p.33 (Σ)"
+    },
+    "Σ": {
+      "code": ".,s",
+      "kind": "op",
+      "source": "General p.33"
+    },
+    "∞": {
+      "code": ",=",
+      "kind": "op",
+      "source": "General p.32 (lim x→-∞)"
+    },
+    "π": {
+      "code": ".p",
+      "kind": "op",
+      "source": "General p.34 (cos 2π/3)"
+    },
+    "α": {
+      "code": ".a",
+      "kind": "op",
+      "source": "General p.33-34 (sin²α)"
+    },
+    "β": {
+      "code": ".b",
+      "kind": "op",
+      "source": "General p.34 (log x^β)"
+    },
+    "θ": {
+      "code": ".?",
+      "kind": "op",
+      "source": "General p.33 (π/2+θ)"
+    },
+    "σ": {
+      "code": ".s",
+      "kind": "op",
+      "source": "General p.34 (σ = ...)"
+    },
+    "Δ": {
+      "code": ".,d",
+      "kind": "op",
+      "source": "General p.32 (Δy/Δx)"
+    },
+    "∆": {
+      "code": ".,d",
+      "kind": "op",
+      "source": "General p.32 (Δ, increment)"
+    },
+    "|": {
+      "code": "\\",
+      "kind": "op",
+      "source": "General p.32, Geometric p.73 (absolute value)"
+    },
+    "‖": {
+      "code": "\\\\",
+      "kind": "op",
+      "source": "General p.35 (norm ‖F‖)"
+    },
+    "(": {
+      "code": "(",
+      "kind": "op",
+      "source": "Geometric p.73"
+    },
+    ")": {
+      "code": ")",
+      "kind": "op",
+      "source": "Geometric p.73"
+    },
+    "[": {
+      "code": "@(",
+      "kind": "op",
+      "source": "Geometric p.73"
+    },
+    "]": {
+      "code": "@)",
+      "kind": "op",
+      "source": "Geometric p.73"
+    },
+    "{": {
+      "code": ".(",
+      "kind": "op",
+      "source": "Geometric p.73"
+    },
+    "}": {
+      "code": ".)",
+      "kind": "op",
+      "source": "Geometric p.73"
+    },
+    ",": {
+      "code": ",",
+      "kind": "op",
+      "source": "Fraction p.21 (a, b, c)"
+    },
+    "…": {
+      "code": "'''",
+      "kind": "op",
+      "source": "Fraction p.21, General p.30"
+    },
+    "'": {
+      "code": "'",
+      "kind": "op",
+      "source": "General p.30-31 (prime x')"
+    },
+    "′": {
+      "code": "'",
+      "kind": "op",
+      "source": "General p.30-31 (prime)"
+    },
+    "″": {
+      "code": "''",
+      "kind": "op",
+      "source": "General p.31 (double prime)"
+    },
+    "∈": {
+      "code": "@e",
+      "kind": "rel",
+      "source": "Geometric p.72 (dots 7-8 in print dropped for 6-dot)"
+    },
+    "∉": {
+      "code": "/@e",
+      "kind": "rel",
+      "source": "Geometric p.72"
+    },
+    "∥": {
+      "code": "$l",
+      "kind": "rel",
+      "source": "Geometric p.68, p.72"
+    },
+    "∦": {
+      "code": "/$l",
+      "kind": "rel",
+      "source": "Geometric p.68, p.72"
+    },
+    "⊥": {
+      "code": "$p",
+      "kind": "rel",
+      "source": "Geometric p.68, p.72"
+    },
+    "~": {
+      "code": "@:",
+      "kind": "rel",
+      "source": "Geometric p.70 (similar)"
+    },
+    "∼": {
+      "code": "@:",
+      "kind": "rel",
+      "source": "Geometric p.70 (similar)"
+    },
+    "≁": {
+      "code": "/@:",
+      "kind": "rel",
+      "source": "rule: negation (Geometric p.72) applied to ~"
+    },
+    "≈": {
+      "code": "@:@:",
+      "kind": "rel",
+      "source": "Geometric p.70"
+    },
+    "≃": {
+      "code": "@::",
+      "kind": "rel",
+      "source": "Geometric p.70"
+    },
+    "≅": {
+      "code": "@:.k",
+      "kind": "rel",
+      "source": "Geometric p.70-71"
+    },
+    "≇": {
+      "code": "/@:.k",
+      "kind": "rel",
+      "source": "rule: negation (Geometric p.72) applied to ≅"
+    },
+    "≡": {
+      "code": "_l",
+      "kind": "rel",
+      "source": "Geometric p.70-71"
+    },
+    "≢": {
+      "code": "/_l",
+      "kind": "rel",
+      "source": "rule: negation (Geometric p.72) applied to ≡"
+    },
+    "∠": {
+      "code": "$[",
+      "kind": "op",
+      "source": "Geometric p.68-69 (∠ABC -> $[,a,b,c)"
+    },
+    "△": {
+      "code": "$t",
+      "kind": "shape",
+      "source": "Geometric p.69 (△ABC -> $t ,a,b,c)"
+    },
+    "○": {
+      "code": "$c",
+      "kind": "shape",
+      "source": "Geometric p.67"
+    },
+    "⊙": {
+      "code": "$c_$*]",
+      "kind": "shape",
+      "source": "Geometric p.67"
+    },
+    "⊕": {
+      "code": "$c_$+]",
+      "kind": "rel",
+      "source": "Geometric p.67; Chemistry p.43 (positive pole of a cell)"
+    },
+    "□": {
+      "code": "$4",
+      "kind": "shape",
+      "source": "Geometric p.68"
+    },
+    "⬠": {
+      "code": "$5",
+      "kind": "shape",
+      "source": "Geometric p.68"
+    },
+    "⬡": {
+      "code": "$6",
+      "kind": "shape",
+      "source": "Geometric p.68"
+    },
+    "▭": {
+      "code": "$r",
+      "kind": "shape",
+      "source": "Geometric p.67"
+    },
+    "▱": {
+      "code": "$g",
+      "kind": "shape",
+      "source": "Geometric p.67"
+    },
+    "⇌": {
+      "code": "$33@o$,[33",
+      "kind": "rel",
+      "source": "Chemistry p.45 (reversible reaction; also p.43 Al3+ example)"
+    },
+    "↑": {
+      "code": "$<33o",
+      "kind": "rel",
+      "source": "Chemistry p.43, p.45 (gas given off / strong, long arrow)"
+    },
+    "⇡": {
+      "code": "\"$<33o",
+      "kind": "rel",
+      "source": "Chemistry p.45 (weak, short arrow: dot 5 before the arrow)"
+    },
+    "↓": {
+      "code": "$%33o",
+      "kind": "rel",
+      "source": "Chemistry p.43, p.45 (precipitate / strong)"
+    },
+    "⇣": {
+      "code": "\"$%33o",
+      "kind": "rel",
+      "source": "Chemistry p.45 (weak precipitate: dot 5 before the arrow)"
+    },
+    "—": {
+      "code": "31",
+      "kind": "rel",
+      "source": "Chemistry p.43-44 (single bond, CH3—CH2—CH3; table: 25,2)"
+    },
+    "═": {
+      "code": "72",
+      "kind": "rel",
+      "source": "Chemistry p.42, p.44 (double bond, O=O; table: 2356,23)"
+    },
+    "☰": {
+      "code": "=l",
+      "kind": "rel",
+      "source": "Chemistry p.42, p.44 (triple bond, N≡N; table: 123456,123)"
+    },
+    "⊖": {
+      "code": "$c_$-]",
+      "kind": "rel",
+      "source": "Chemistry p.43 (negative pole of a cell)"
+    },
+    "¦": {
+      "code": "l",
+      "kind": "op",
+      "source": "Chemistry p.43 (salt bridge ¦¦ = ⠇⠇)"
+    },
+    "Ⅰ": {
+      "code": "_#1",
+      "kind": "op",
+      "source": "Chemistry p.45 (valence I, written —: dots 456 before the number sign)"
+    },
+    "Ⅱ": {
+      "code": "_#2",
+      "kind": "op",
+      "source": "Chemistry p.45 (valence II, written =)"
+    },
+    "Ⅲ": {
+      "code": "_#3",
+      "kind": "op",
+      "source": "Chemistry p.45 (valence III, written ≡)"
+    },
+    "⏟": {
+      "code": ".)",
+      "kind": "op",
+      "source": "Chemistry p.41-42 (brace under a drawing: ⠐ ... ⠩⠨⠾⠻; use it on the last line of a drawing)"
+    },
+    "⋰": {
+      "code": "i",
+      "kind": "op",
+      "source": "Chemistry p.45 table 16 (slanted pair of dots, left: 24)"
+    },
+    "⋱": {
+      "code": "e",
+      "kind": "op",
+      "source": "Chemistry p.45 table 15 (slanted pair of dots, right: 15)"
+    },
+    "⋮": {
+      "code": "_l",
+      "kind": "op",
+      "source": "Chemistry p.44 table 13 (three pairs of dots ⋮⋮: 456,123)"
+    },
+    "♂": {
+      "code": "m$o",
+      "kind": "op",
+      "source": "Biology p.46 (male)"
+    },
+    "♀": {
+      "code": "f_=",
+      "kind": "op",
+      "source": "Biology p.46 (female)"
+    }
+  }
+}

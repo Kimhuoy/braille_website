@@ -1,0 +1,21 @@
+
+stages:          # List of stages for jobs, and their order of execution
+  - backend
+  - frontend
+
+backend-job:       # This job runs in the build stage, which runs first.
+  stage: backend
+  script:
+    - cd Backend
+    - pip install -r requirments.txt
+    - python main.py
+
+frontend-job:   # This job runs in the test stage.
+  stage: frontend    # It only starts when the job in the build stage completes successfully.
+  script:
+    - cd Frontend
+    - npm install
+    - npm run dev
+
+
+
