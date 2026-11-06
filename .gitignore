@@ -45,3 +45,7 @@ file-to-gcode/*
 /graft/
 # Sample documents for trying uploads by hand: kept on your computer, never in git (may hold personal data)
 Backend/uploads/
+# Private documents (e.g. the security audit report): never in git
+docs/
+# Local settings for the graft code-search tool
+.ignore
