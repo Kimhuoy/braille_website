@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Icon } from "@iconify/react";
 import appStore from "../../store/app";
@@ -259,6 +259,8 @@ const Inbox = ({ c, onSignedOut }) => {
     }
   }, [guard]);
 
+  // load() sets state only after the request returns (after await), not synchronously
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(); }, [load]);
 
   const changeStatus = async (item, value) => {

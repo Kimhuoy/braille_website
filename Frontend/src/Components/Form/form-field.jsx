@@ -1,4 +1,3 @@
-import React from "react";
 
 // Shared by the Contribute and Feedback forms.
 export const inputClass =

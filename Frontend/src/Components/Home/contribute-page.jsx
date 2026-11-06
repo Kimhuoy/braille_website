@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
 import { saveAs } from "file-saver";
 import { Icon } from "@iconify/react";
@@ -331,7 +331,7 @@ const Contribute = () => {
     if (!file) return;
     const reader = new FileReader();
     reader.onload = () => {
-      const csv = String(reader.result).replace(/^﻿/, "");
+      const csv = String(reader.result).replace(/^\uFEFF/, "");
       const lines = parseCsv(csv).filter((cells) => cells.some((v) => v.trim()));
       // Old template: type, text, braille, kind, meaning, source
       const oldFormat = lines.length > 0 && lines[0][0].trim().toLowerCase() === "type";

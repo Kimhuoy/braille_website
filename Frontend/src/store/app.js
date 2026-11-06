@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const appStore = create((set, get) => ({
+const appStore = create((set) => ({
   nav: false,
   setNav: (data) => set({ nav: data }),
 
@@ -25,12 +25,6 @@ const appStore = create((set, get) => ({
 
   resultBrailleTranslate: null,
   setResultBrailleTranslate: (data) => set({ resultBrailleTranslate: data }),
-
-  handleSubmiteBraille: () => {
-    set((state) => ({
-      resultBrailleTranslate: state.setResultBrailleTranslate(data),
-    }));
-  },
 
   switchText: false,
   setSwitchText: (data) => set({ switchText: data }),
