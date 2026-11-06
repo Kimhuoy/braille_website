@@ -8,7 +8,7 @@ import temp_files
 import zipfile
 from PIL import Image
 import pytesseract
-import fitz
+import pymupdf as fitz
 from docx2pdf import convert
 
 # ========Format for writing braille to file =========
@@ -190,8 +190,9 @@ DUXBURY_EXTENSIONS = (".dxb", ".dxp")            # Duxbury's own closed format: 
 
 def pef_text(path):
     """PEF (Portable Embosser Format, XML): each <row> is one line of Unicode Braille."""
-    import xml.etree.ElementTree as ET
     from xml.parsers import expat
+
+    import defusedxml.ElementTree as ET     # refuses entity and external-reference attacks on its own too
 
     def refuse(*_):     # PEF files have no DOCTYPE; malicious XML attacks a parser through one
         raise UploadError("unreadable")
@@ -200,7 +201,10 @@ def pef_text(path):
     checker.StartDoctypeDeclHandler = refuse
     with open(path, "rb") as f:
         checker.ParseFile(f)
-    root = ET.parse(path).getroot()
+    try:
+        root = ET.parse(path).getroot()
+    except ET.DefusedXmlException as error:
+        raise UploadError("unreadable") from error
     return "\n".join(el.text or "" for el in root.iter() if el.tag.rsplit("}", 1)[-1] == "row")
 
 

@@ -387,6 +387,7 @@ def translateBrailleToKhmer(uploaded_braille):
     return braille_result
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Debug mode lets anyone who reaches it run code, so it is off unless asked for (as in main.py)
+    app.run(debug=os.environ.get("FLASK_DEBUG") == "1")
 
 

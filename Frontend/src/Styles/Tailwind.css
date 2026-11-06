@@ -1,20 +1,7 @@
-/* src/styles/tailwind.css */
+/* src/styles/tailwind.css
+   Tailwind's layers are included once, in src/index.css (@tailwind base/components/utilities).
+   The @import lines that used to sit here came after other rules, so browsers and PostCSS ignored them. */
 
-/* @font-face {
-    font-family: 'KohSante';
-    src: url('Frontend/src/fonts/KOHSANTEPHEAP-REGULAR.TTF') format('truetype');
-    /* Add more src lines if you have multiple font formats (e.g., woff, woff2) */
-   */
-  
-  /* Apply the custom font to elements */
-  body {
-     font-family: 'Koh Santepheap', serif;
-  } 
-
-  
- 
-  /* Include Tailwind CSS styles */
-  @import 'tailwindcss/base';
-  @import 'tailwindcss/components';
-  @import 'tailwindcss/utilities';
-  
+body {
+  font-family: 'Koh Santepheap', serif;
+}

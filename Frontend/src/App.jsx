@@ -44,6 +44,12 @@ const App = () => {
           path: "/admin",
           element: ADMIN_PAGE_ENABLED ? <Admin /> : <Navigate to="/" replace />,
         },
+        {
+          // Any other address (a typo, an old link) goes to the home page
+          // instead of React Router's raw error screen.
+          path: "*",
+          element: <Navigate to="/" replace />,
+        },
       ],
     },
   ]);

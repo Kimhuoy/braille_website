@@ -19,7 +19,7 @@ import tempfile
 import time
 from contextlib import closing
 
-from flask import jsonify, request, send_file
+from flask import jsonify, redirect, request, send_file
 from flask_cors import CORS
 from werkzeug.middleware.proxy_fix import ProxyFix
 
@@ -70,8 +70,8 @@ CONTENT_SECURITY_POLICY = "; ".join([
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",   # React style={} attributes
     "font-src 'self' data: https://fonts.gstatic.com",
     "img-src 'self' data: blob:",
-    " ".join(["connect-src 'self' https://api.iconify.design https://api.simplesvg.com https://api.unisvg.com",
-              os.environ.get("FORMS_API_ORIGIN", "")]).strip(),
+    # Icons ship with the website (Frontend/scripts/build-icons.mjs), so no icon API is allowed here
+    " ".join(["connect-src 'self'", os.environ.get("FORMS_API_ORIGIN", "")]).strip(),
     "media-src 'self' blob:",
     "object-src 'none'",
     "base-uri 'self'",
@@ -108,11 +108,18 @@ def _db_path():
     return os.environ.get("RATE_LIMIT_DB") or os.path.join(tempfile.gettempdir(), "braille-rate-limit.sqlite3")
 
 
-def over_limit(key, limit, seconds, cost=1):
+# Routes that must stay limited even when the counters cannot be stored: the admin password
+# could otherwise be guessed without limit, and the forms could fill the disk.
+FAIL_CLOSED = {"admin.login", "submit_feedback", "submit_contribution"}
+STORAGE_DOWN_WAIT = 60
+
+
+def over_limit(key, limit, seconds, cost=1, fail_closed=False):
     """
     Count a request. Returns the seconds to wait if the limit is exceeded, else 0.
     Gunicorn runs several workers, so the counters live in one small SQLite file.
-    If that file cannot be used the website keeps working, without limits.
+    If that file cannot be used, the translator keeps working without limits (fail_closed=False),
+    while the sign-in and the forms refuse requests until it works again (fail_closed=True).
     """
     now = int(time.time())
     window = now // seconds
@@ -128,7 +135,7 @@ def over_limit(key, limit, seconds, cost=1):
                 db.execute("DELETE FROM hits WHERE expires < ?", (now,))
     except sqlite3.Error:
         logging.exception("Rate limit storage failed")
-        return 0
+        return STORAGE_DOWN_WAIT if fail_closed else 0
     return seconds - now % seconds if count > limit else 0
 
 
@@ -144,8 +151,15 @@ def _before_request():
     if request.method == "OPTIONS":
         return None
 
+    # The proxy said the visitor used plain http: send them to the https address.
+    # (Traefik normally does this itself; this covers an http route without the redirect.)
+    if request.headers.get("X-Forwarded-Proto") == "http" and request.method in ("GET", "HEAD"):
+        return redirect(request.url.replace("http://", "https://", 1), code=301)
+
     endpoint = request.endpoint
-    if endpoint in GLOBAL_LIMITS and (wait := over_limit(f"all:{endpoint}", *GLOBAL_LIMITS[endpoint])):
+    strict = endpoint in FAIL_CLOSED
+    if endpoint in GLOBAL_LIMITS and (wait := over_limit(f"all:{endpoint}", *GLOBAL_LIMITS[endpoint],
+                                                         fail_closed=strict)):
         return _rate_limited(wait)
     if endpoint in RATE_LIMITS:
         address, hidden = client_address()
@@ -156,7 +170,8 @@ def _before_request():
         if endpoint in WEIGHTED_ENDPOINTS:
             cost += (request.content_length or 0) // WEIGHT_BYTES
         key = f"{endpoint}:hidden" if hidden else f"{endpoint}:{address}"
-        if (wait := over_limit(key, limit * HIDDEN_CLIENTS_FACTOR if hidden else limit, seconds, cost)):
+        if (wait := over_limit(key, limit * HIDDEN_CLIENTS_FACTOR if hidden else limit, seconds, cost,
+                               fail_closed=strict)):
             logging.warning("Rate limit reached on %s", endpoint)
             return _rate_limited(wait)
     return None

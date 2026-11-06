@@ -7,7 +7,10 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_TAG: 2026.09.28-10
+  # A new tag for every commit. With one fixed tag, Docker Swarm kept running the old
+  # container after a deploy, so fixes (page links, security headers) never went live.
+  IMAGE_TAG: ${{ github.sha }}
+  SITE_URL: https://braille.idri.edu.kh
 
 jobs:
   build-and-push:
@@ -82,4 +85,28 @@ jobs:
             echo "Checking Docker stack status..."
             docker stack ps braille --no-trunc
             
-            echo "✅ Deployment successful!"
+            echo "✅ Deployment script finished"
+
+  smoke-test:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check page links, API 404s and security headers on the live site
+        run: |
+          set -eu
+          sleep 30   # let Swarm replace the containers
+          for page in / /guideline /about /printer-guide /contribute /feedback; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$SITE_URL$page")
+            echo "$page -> $code"
+            [ "$code" = 200 ] || { echo "::error::$page returned $code (old image still running?)"; exit 1; }
+          done
+          body=$(curl -s "$SITE_URL/api/does-not-exist")
+          echo "$body" | grep -q '"error"' || { echo "::error::/api 404 is not JSON: old image still running"; exit 1; }
+          headers=$(curl -sI "$SITE_URL/")
+          for h in content-security-policy x-frame-options x-content-type-options; do
+            echo "$headers" | grep -qi "^$h:" || { echo "::error::missing $h header"; exit 1; }
+          done
+          cors=$(curl -s -o /dev/null -D - -X OPTIONS -H "Origin: https://evil.example" \
+                 -H "Access-Control-Request-Method: POST" "$SITE_URL/text" | grep -i '^access-control-allow-origin' || true)
+          [ -z "$cors" ] || { echo "::error::CORS allows other websites: $cors"; exit 1; }
+          echo "Live site OK"
