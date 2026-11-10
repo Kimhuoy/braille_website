@@ -11,7 +11,7 @@ import tempfile
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "file-to-gcode"))
 
-import fitz  # noqa: E402
+import pymupdf as fitz  # noqa: E402
 from docx import Document  # noqa: E402
 
 import file_to_gcode as f2g  # noqa: E402

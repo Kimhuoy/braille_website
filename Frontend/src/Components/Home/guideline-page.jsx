@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import appStore from "../../store/app";
 // Screenshots of the website, taken at double resolution so they stay sharp.

@@ -1,4 +1,3 @@
-import React from "react";
 import { Icon } from "@iconify/react";
 import appStore from "../../store/app";
 import printerMachine from "../../assets/printer-machine.png";

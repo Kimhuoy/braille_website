@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { symbolCatalog, subjectOrder } from "../../data/symbol-catalog";
 import { SUBJECT_TOOLS } from "../../data/equation-templates";
@@ -106,7 +106,7 @@ const EquationRibbon = ({ onInsert, supported, interfaceLang }) => {
       {
         key: "quick",
         label: subjectKey === "chemistry" ? { km: "គីមីមូលដ្ឋាន", en: "Basic Chemistry" } : { km: "គណិតមូលដ្ឋាន", en: "Basic Math" },
-        items: QUICK,
+        items: SUBJECT_TOOLS[subjectKey] ? SUBJECT_TOOLS[subjectKey].quick : [],
       },
       ...symbolCatalog[subjectKey].categories.map((c) => ({
         key: c.key,

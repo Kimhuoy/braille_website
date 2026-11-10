@@ -12,7 +12,7 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
-import fitz  # noqa: E402
+import pymupdf as fitz  # noqa: E402
 from docx import Document  # noqa: E402
 from werkzeug.datastructures import FileStorage  # noqa: E402
 

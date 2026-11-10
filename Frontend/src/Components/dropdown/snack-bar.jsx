@@ -1,4 +1,3 @@
-import React from "react";
 import { Icon } from "@iconify/react";
 import { useEffect } from "react";
 import appStore from "../../store/app";
@@ -16,7 +15,7 @@ const SnackBar = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, [showSnackbar, onClose]);
+  }, [showSnackbar, onClose, setIsVisile]);
 
   return (
     <div

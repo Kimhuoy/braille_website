@@ -1,4 +1,3 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
 import TranslationPage from "../Translate/translation-page";
 import FileUploadDialog from "../Translate/file-upload-dialog";

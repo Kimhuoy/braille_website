@@ -1,21 +1,26 @@
+# Checks only: tests and a production build. Deploys run from GitHub Actions (.github/workflows/cd.yml).
+# The old jobs started the development servers (python main.py, npm run dev), which never finish
+# and would run Flask's development server on a CI machine.
+stages:
+  - test
 
-stages:          # List of stages for jobs, and their order of execution
-  - backend
-  - frontend
-
-backend-job:       # This job runs in the build stage, which runs first.
-  stage: backend
+backend-tests:
+  stage: test
+  image: python:3.11-slim
+  before_script:
+    - pip install --no-cache-dir -r Backend/requirements.txt
   script:
-    - cd Backend
-    - pip install -r requirments.txt
-    - python main.py
+    - |
+      for t in Backend/tests/test_*.py; do
+        case "$t" in *file_to_gcode*|*end_to_end*) continue;; esac   # need the separate file-to-gcode tool
+        python -I -X utf8 "$t"
+      done
 
-frontend-job:   # This job runs in the test stage.
-  stage: frontend    # It only starts when the job in the build stage completes successfully.
+frontend-build:
+  stage: test
+  image: node:22-alpine
   script:
     - cd Frontend
-    - npm install
-    - npm run dev
-
-
-
+    - npm ci
+    - npm audit --omit=dev --audit-level=moderate
+    - npm run build

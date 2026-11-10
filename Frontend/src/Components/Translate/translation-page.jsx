@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import axios from "axios";
 import appStore from "../../store/app";
@@ -183,10 +183,8 @@ const TranslationPage = () => {
     ) {
       setInputBraille(resultFileBraille.dataInFileBraille);
       setResultTextAndBraille(resultFileBraille.resultDataBraille);
-    } else {
-      console.log("Object is null or undefined, or dataInFile is not present");
     }
-  }, [resultFileText, resultFileBraille]);
+  }, [resultFileText, resultFileBraille, setInputText, setInputBraille, setResultTextAndBraille]);
 
   // for show snackbar alert
   const handleShowSnackbar = (SnackBarMessage) => {

@@ -15,7 +15,7 @@ import contributions
 import english_braille
 import feedback
 from PIL import Image
-import fitz
+import pymupdf as fitz
 import pytesseract
 from khmernltk import word_tokenize
 from gcc_segmentation import GCCSegmentation

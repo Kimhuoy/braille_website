@@ -20,11 +20,15 @@ ENV FEEDBACK_DIR=/data/feedback
 
 WORKDIR /app
 
+# apt-get upgrade: take the latest Debian security fixes, not only those in the base image
 RUN apt-get update \
+    && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends tesseract-ocr tesseract-ocr-khm \
     && rm -rf /var/lib/apt/lists/*
 
 COPY Backend/requirements.txt ./
+# The base image's pip and setuptools have known advisories (pip-audit, 2026-11-04)
+RUN pip install --no-cache-dir -U pip "setuptools>=84.1.0"
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY Backend/ ./

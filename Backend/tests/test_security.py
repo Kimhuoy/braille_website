@@ -401,7 +401,7 @@ def run():
         z.writestr("word/document.xml", b"\0" * (FileFormat.MAX_DOCX_UNPACKED_MB * 2**20 + 1))
     assert len(bomb.getvalue()) < 2 * 2**20
     assert read("bomb.docx", bomb.getvalue()) == "unreadable"
-    import fitz
+    import pymupdf as fitz
     pdf = fitz.open()
     pdf.new_page(width=14400, height=14400)
     assert read("huge-scan.pdf", pdf.tobytes()) == "pdf_failed"
